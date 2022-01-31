@@ -1,0 +1,21 @@
+{
+    "name": "lzs9605/liteapi",
+    "description": "A lite php Framework for api provide",
+    "type": "project",
+    "license": "Apache-2.0",
+    "authors": [
+        {
+            "name": "Jason Lin",
+            "email": "lzs9605@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=7.0",
+        "ext-swoole": ">=4.5.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "LiteApi\\": "src/"
+        }
+    }
+}
