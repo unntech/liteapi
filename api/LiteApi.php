@@ -1,7 +1,7 @@
 <?php
 namespace LiteApi;
 
-defined('IN_LiteApi') or exit('Access Denied');
+defined('IN_LitePhp') or exit('Access Denied');
 /**
  * LiteApi 基础类
  */

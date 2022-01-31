@@ -1,6 +1,6 @@
 <?php
 
-defined('IN_LiteApi') or exit('Access Denied');
+defined('IN_LitePhp') or exit('Access Denied');
 
 return[
     'name' => 'LiteApi',

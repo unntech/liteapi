@@ -13,7 +13,7 @@ if(DT_DEBUG) {
 }
 
 
-define('IN_LiteApi', true);
+define('IN_LitePhp', true);
 define('DT_ROOT', str_replace("\\", '/', dirname(__FILE__)));
 
 require_once DT_ROOT . '/vendor/autoload.php';

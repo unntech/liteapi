@@ -45,7 +45,7 @@ http://localhost:9898
 
 如果需要更新框架使用
 ~~~
-composer update
+composer update lzs9605/litephp
 ~~~
 
 ## 文档
