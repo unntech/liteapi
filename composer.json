@@ -11,7 +11,8 @@
     ],
     "require": {
         "php": ">=7.0",
-        "ext-swoole": ">=4.5.0"
+        "ext-swoole": ">=4.5.0",
+        "lzs9605/litephp": "*"
     },
     "autoload": {
         "psr-4": {

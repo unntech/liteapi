@@ -14,7 +14,7 @@ class LiteApi
     
     public function __construct()
     {
-        $this->config = new \LiteApi\Config();
+        $this->config = new \LitePhp\Config(DT_ROOT . "/config/");
         $this->config->load(['app']);
     }
     
