@@ -11,3 +11,6 @@ _notes/
 # composer
 /vendor/
 composer.lock
+
+# config
+config/

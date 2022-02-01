@@ -32,7 +32,7 @@ composer create-project lzs9605/liteapi yourApp
 
 ~~~
 将目录config.sample 改名为 config，可以更据需求增加配置文件
-读取例子见：tests/getconfig.sample.php
+读取例子见：tests/sample.config.php
 ~~~
 
 
