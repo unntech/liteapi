@@ -1,5 +1,5 @@
 {
-    "name": "lzs9605/liteapi",
+    "name": "unntech/liteapi",
     "description": "A lite php Framework for api provide",
     "type": "project",
     "license": "Apache-2.0",
@@ -12,7 +12,7 @@
     "require": {
         "php": ">=7.0",
         "ext-swoole": ">=4.5.0",
-        "lzs9605/litephp": "*"
+        "unntech/litephp": "*"
     },
     "autoload": {
         "psr-4": {

@@ -18,7 +18,7 @@ class LiteApi
         $this->config->load(['app']);
     }
     
-    public function set_db($i=0){
+    public function set_db($i=0){ //$i 为配置文件db列表里的第几个配置
         $this->config->load(['db']);
         $this->db = \LitePhp\Db::Create($this->config->get('db'), $i);
     }
