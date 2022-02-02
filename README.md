@@ -2,10 +2,10 @@
 LiteApi 1.0
 ===============
 
-[![Total Downloads](https://poser.pugx.org/lzs9605/liteapi/downloads)](https://packagist.org/packages/lzs9605/liteapi)
-[![Latest Stable Version](https://poser.pugx.org/lzs9605/liteapi/v/stable)](https://packagist.org/packages/lzs9605/liteapi)
+[![Total Downloads](https://poser.pugx.org/unntech/liteapi/downloads)](https://packagist.org/packages/unntech/liteapi)
+[![Latest Stable Version](https://poser.pugx.org/unntech/liteapi/v/stable)](https://packagist.org/packages/unntech/liteapi)
 [![PHP Version](https://img.shields.io/badge/php-%3E%3D7.0-8892BF.svg)](http://www.php.net/)
-[![License](https://poser.pugx.org/lzs9605/liteapi/license)](https://packagist.org/packages/lzs9605/liteapi)
+[![License](https://poser.pugx.org/unntech/liteapi/license)](https://packagist.org/packages/unntech/liteapi)
 
 基于PHP Swoole 创建的协程框架，可用于生产环境的高性能API接口。
 
@@ -27,7 +27,7 @@ LiteApi 1.0
 ## 安装
 
 ~~~
-composer create-project lzs9605/liteapi yourApp
+composer create-project unntech/liteapi yourApp
 ~~~
 
 ~~~
@@ -51,7 +51,7 @@ http://localhost:9898
 
 如果需要更新框架使用
 ~~~
-composer update lzs9605/litephp
+composer update unntech/litephp
 ~~~
 
 ## 文档
