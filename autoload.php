@@ -15,7 +15,7 @@ define('DT_ROOT', str_replace("\\", '/', dirname(__FILE__)));
 
 require_once DT_ROOT . '/vendor/autoload.php';
 
-$Lite = new \LiteApi\LiteApi();
+$Lite = new LiteApi\LiteApi();
 $DT_TIME = time();
 
 define('DT_KEY', $Lite->config->get('app.authkey', 'LitePhp'));

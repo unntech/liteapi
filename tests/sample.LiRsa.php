@@ -3,14 +3,14 @@
 require __DIR__.'/../autoload.php';
 
 //生成RSA公私钥
-$unnrsa = new \LitePhp\LiRsa();
+$unnrsa = new LitePhp\LiRsa();
 $c = $unnrsa->createKey();
 var_dump($c);
 
 $pubKey = $c['pub'];
 $priKey = $c['priv'];
 
-$unnrsa = new \LitePhp\LiRsa( $pubKey, $priKey );
+$unnrsa = new LitePhp\LiRsa( $pubKey, $priKey );
 $unnrsa->SetThirdPubKey($pubKey);
 $a = '测试RSA2';
 //生成RSA签名

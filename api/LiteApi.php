@@ -11,21 +11,32 @@ class LiteApi
      * 配置参数
      */
     public $config, $db, $redis;
+    public $seckey='';
     
     public function __construct()
     {
         $this->config = new \LitePhp\Config(DT_ROOT . "/config/");
-        $this->config->load(['app']);
+        $this->config->load(['app', 'db', 'redis']);
     }
     
     public function set_db($i=0){ //$i 为配置文件db列表里的第几个配置
-        $this->config->load(['db']);
+        //$this->config->load(['db']);
         $this->db = \LitePhp\Db::Create($this->config->get('db'), $i);
     }
     
+    public function close_db(){
+        $this->db->close();
+        $this->db = null;
+    }
+    
     public function set_redis(){
-        $this->config->load(['redis']);
+        //$this->config->load(['redis']);
         $this->redis = \LitePhp\Redis::Create($this->config->get('redis'));
+    }
+    
+    public function close_redis(){
+        $this->redis->close();
+        $this->redis = null;
     }
     
     public function alog($type, $log1='', $log2 = '', $log3 = '' ) {
@@ -35,6 +46,17 @@ class LiteApi
         $SQLC = "INSERT INTO alog (type, log1,log2,log3) VALUES ('{$type}', '" . addslashes( $log1 ) . "','" . addslashes( $log2 ) . "','" . addslashes( $log3 ) . "')";
         $this->db->query( $SQLC );
         return $this->db->insert_id();
+    }
+    
+    public function do_get($url, $aHeader = null){
+        $res = \LitePhp\LiHttp::get($url, $aHeader);
+        return $res;
+        
+    }
+    
+    public function do_post($url, $data=null, $aHeader = null){
+        $res = \LitePhp\LiHttp::post($url, $data, $aHeader);
+        return $res;
     }
     
 }

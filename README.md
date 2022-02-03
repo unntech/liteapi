@@ -40,13 +40,19 @@ composer create-project unntech/liteapi yourApp
 
 ~~~
 cd yourApp
-./app.sh start
+./http.sh start    (#chmod +x http.sh 先赋予可执行权限)
 ~~~
 
 然后就可以在浏览器中访问
 
 ~~~
-http://localhost:9898
+http://localhost:9898/authorize  #获取TOKEN
+
+http://localhost:9898/sampleApi/test
+~~~
+
+~~~
+访问的路径对应/api/controller/文件名/函数名
 ~~~
 
 如果需要更新框架使用
