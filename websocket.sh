@@ -1,11 +1,11 @@
 
 
-pid=$(cat http.pid)
+pid=$(cat websocket.pid)
 
 case $1 in
 	start)
 		echo 'Start Service...'
-		php httpapi.php
+		php websocket.php
 		;;
 	stop)
 		echo 'Stop Service...'
@@ -24,7 +24,7 @@ case $1 in
 		kill -15 $pid
 		sleep 2
 		echo 'Start Service...'
-		php httpapi.php
+		php websocket.php
 		;;
 	status)
 		ps -f $pid

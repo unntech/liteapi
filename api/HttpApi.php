@@ -60,8 +60,8 @@ class HttpApi
                 if(file_exists(__DIR__ . '/controller/'. $action . '.php')){
                     $api = new $newclass();
                     $api->init($request, $this->Lite->config);
-                    $api->set_db();
-                    $api->set_redis();
+                    //$api->set_db();
+                    //$api->set_redis();
                     $ret = $api->$func();
                     
                 }else{

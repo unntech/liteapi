@@ -43,6 +43,9 @@ class HttpRequest
     }
     
     public function set_db($i=0){ //$i 为配置文件db列表里的第几个配置
+        if(!empty($this->db)){ //已连接
+            return;
+        }
         $cfg = $this->config->get('db');
         if(empty($cfg)){
             $this->config->load(['db']);
@@ -57,6 +60,9 @@ class HttpRequest
     }
     
     public function set_redis(){
+        if(!empty($this->redis)){ //已连接
+            return;
+        }
         $cfg = $this->config->get('redis');
         if(empty($cfg)){
             $this->config->load(['redis']);

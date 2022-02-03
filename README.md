@@ -36,7 +36,7 @@ composer create-project unntech/liteapi yourApp
 ~~~
 
 
-启动服务
+启动HttpApi服务
 
 ~~~
 cd yourApp
@@ -55,6 +55,21 @@ http://localhost:9898/sampleApi/test
 访问的路径对应/api/controller/文件名/函数名
 ~~~
 
+启动WebSocket服务
+
+~~~
+cd yourApp
+./websocket.sh start    (#chmod +x websocket.sh 先赋予可执行权限)
+~~~
+
+然后就可以使用进行websocket连接
+~~~
+ws://localhost:9899
+~~~
+
+~~~
+/api/WebSocket.php 对应方法处理相应的事件过程
+~~~
 如果需要更新框架使用
 ~~~
 composer update unntech/litephp

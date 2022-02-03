@@ -10,3 +10,4 @@ $a = LitePhp\LiComm::createNonceStr();
 
 var_dump($a);
 
+echo LitePhp\LitePhp::VERSION;

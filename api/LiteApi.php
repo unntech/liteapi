@@ -10,13 +10,15 @@ class LiteApi
     /**
      * 配置参数
      */
+    const VERSION = '1.0.2';
     public $config, $db, $redis;
-    public $seckey='';
+    public $appName;
     
     public function __construct()
     {
         $this->config = new \LitePhp\Config(DT_ROOT . "/config/");
         $this->config->load(['app', 'db', 'redis']);
+        $this->appName = $this->config->get('app.name', 'LiteApi');
     }
     
     public function set_db($i=0){ //$i 为配置文件db列表里的第几个配置
