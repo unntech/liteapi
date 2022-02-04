@@ -33,6 +33,7 @@ class WebSocket
         //var_dump($request);
         //do something...
         $this->response($request->fd, 'OPEN');
+        $requestPath = isset($request->server['path_info']) ? explode('/',$request->server['path_info']) : [];
         
     }
     

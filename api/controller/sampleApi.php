@@ -25,7 +25,7 @@ class sampleApi extends HttpRequest
                  'cookie'=>$this->request['cookie'],
                  'remoteAddr'=>$this->remoteAddr];
         
-        $response = $this->response('TEST', 0, "调用方法：test 成功", $data);
+        $response = $this->response(0, "调用方法：test 成功", $data);
         return $response;
     }
 }

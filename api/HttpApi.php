@@ -30,16 +30,17 @@ class HttpApi
         $req->init($request, $this->Lite->config);
         
         if(!$req->verifySign()){
-            $ret =$req->response('ERROR', 11, '数据验签错误');
+            $ret =$req->response(11, '数据验签错误');
             $this->response($ret, $response);
             return;
         }
         if($requestPath[1] == 'authorize'){ //签发TOKEN
             $res = $this->authorize($request);
             if($res){
-                $ret =$req->response('TOKEN', 0, '获取TOKEN', $res);
+                //$res['signtype'] = 'RSA';
+                $ret =$req->response(0, '获取TOKEN', $res);
             }else{
-                $ret =$req->response('ERROR', 100, '获取TOKEN失败！');
+                $ret =$req->response(100, '获取TOKEN失败！');
             }
             $this->response($ret, $response);
             return;
@@ -47,7 +48,7 @@ class HttpApi
         
         $jwt = $this->verifyToken($request);
         if($jwt === false){
-            $ret =$req->response('ERROR', 99, '验证TOKEN失败！');
+            $ret =$req->response(99, '验证TOKEN失败！');
             $this->response($ret, $response);
             return;
         }
@@ -65,12 +66,12 @@ class HttpApi
                     $ret = $api->$func();
                     
                 }else{
-                    $ret =$req->response('ERROR', -1, '接口不存在！');
+                    $ret =$req->response(-1, '接口不存在！');
                 }
                 
             }catch(Exception $e){
                 echo $emsg = $e->getMessage();
-                $ret =$req->response('ERROR', -1, $emsg);
+                $ret =$req->response(-1, $emsg);
             }
         }else{
             $ret = $req->noneType();

@@ -19,7 +19,7 @@ class HttpRequest
     public function __call($name, $arguments) {
         //方法名$name区分大小写
         
-        return $this->response('ERROR', -1, "调用方法：{$name} 不存在");
+        return $this->response(-1, "调用方法：{$name} 不存在");
     }  
     
     public function init($request, $config){
@@ -77,10 +77,10 @@ class HttpRequest
     }
     
     public function noneType(){
-        return $this->response('NONE', 10, 'NONE DATA');
+        return $this->response(10, 'NONE DATA');
     }
     
-    public function response($type, $err=0, $msg='', $data=array()){
+    public function response($err=0, $msg='', $data=array()){
         if(isset($data['signtype']) && $data['signtype'] != 'NONE'){
             ksort($data);
             switch($data['signtype']){
@@ -92,18 +92,25 @@ class HttpRequest
                     $sign = strtoupper(hash("sha256",json_encode($data,JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE).$this->seckey));
                     $data['sign'] = $sign;
                     break;
+                case 'RSA':
+                    $_rsa = new \LitePhp\LiRsa($this->config->get('app.rsakey.pubkey'), $this->config->get('app.rsakey.privkey'));
+                    $data = $_rsa->signArray($data);
+                    break;
 
             }
         }{
             $data['signtype'] = 'NONE';
         }
-        $ret = array('type'=>$type,'errcode'=>$err,'fd'=>$this->fd, 'msg'=>$msg);
+        $ret = array('errcode'=>$err,'fd'=>$this->fd, 'msg'=>$msg);
         $ret['data'] = $data;
         return $ret;
     }
     
     public function verifySign(){
         $data = $this->postData;
+        if(!is_array($data)){
+            return true;
+        }
         $dataSign = isset($data['sign']) ? $data['sign'] : 'NONE';
         ksort($data);
         $verify = false;
@@ -122,6 +129,12 @@ class HttpRequest
                     if($dataSign == $sign){
                         $verify = true;
                     }
+                    break;
+                case 'RSA':
+                    //$data['sign'] = $dataSign;
+                    $_rsa = new \LitePhp\LiRsa($this->config->get('app.rsakey.pubkey'), $this->config->get('app.rsakey.privkey'));
+                    $_rsa->SetThirdPubKey($this->config->get('app.rsakey.thirdPubkey'));
+                    $verify = $_rsa->verifySignArray($data);
                     break;
                 default:
                     $verify = false;
