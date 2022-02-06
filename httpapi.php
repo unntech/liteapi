@@ -37,9 +37,9 @@ class LiHttpApi {
         }
         $this->server -> set($this->options);
         
-        $this->commTable = new Swoole\Table(1024);
-        $this->commTable->column('num', Swoole\Table::TYPE_INT);
-        $this->commTable->create();
+        LiteApi\LiApiCommVar::$commTable = new Swoole\Table(1024);
+        LiteApi\LiApiCommVar::$commTable->column('num', Swoole\Table::TYPE_INT);
+        LiteApi\LiApiCommVar::$commTable->create();
         
         $this->server->on("request", [$this, 'onRequest']);
         $this->server->on("Task", [$this, 'onTask']);

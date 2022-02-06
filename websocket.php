@@ -37,9 +37,9 @@ class LiWebSocket {
         }
         $this->server -> set($this->options);
         
-        $this->commTable = new Swoole\Table(1024);
-        $this->commTable->column('num', Swoole\Table::TYPE_INT);
-        $this->commTable->create();
+        LiteApi\LiApiCommVar::$commTable = new Swoole\Table(1024);
+        LiteApi\LiApiCommVar::$commTable->column('num', Swoole\Table::TYPE_INT);
+        LiteApi\LiApiCommVar::$commTable->create();
         
         $this->server->on("open", [$this, 'onOpen']);
         $this->server->on("message", [$this, 'onMessage']);
@@ -52,7 +52,7 @@ class LiWebSocket {
 
             $this->Lite = new LiteApi\LiteApi();
             $this->Lite->config->load(['websocket']);
-            $wSket = new LiteApi\WebSocket($this->Lite, $serv);
+            $wSket = new LiteApi\WebSocket($this->Lite, $this->server);
             $wSket->onWorkerStart($serv, $worker_id);
             unset($wSket);
             
@@ -63,7 +63,7 @@ class LiWebSocket {
         });
 
         $this->server->on('shutdown',function ($serv) {
-            $wSket = new LiteApi\WebSocket($this->Lite, $serv);
+            $wSket = new LiteApi\WebSocket($this->Lite, $this->server);
             $wSket->onShutdown($serv);
             unset($wSket);
         });
@@ -75,19 +75,19 @@ class LiWebSocket {
     }
     
     public function onOpen(Swoole\WebSocket\Server $serv, $request) {
-        $wSket = new LiteApi\WebSocket($this->Lite, $serv);
+        $wSket = new LiteApi\WebSocket($this->Lite, $this->server);
         $wSket->onOpen($request);
         unset($wSket);
     }
     
     public function onMessage(Swoole\WebSocket\Server $serv, $frame) {
-        $wSket = new LiteApi\WebSocket($this->Lite, $serv);
+        $wSket = new LiteApi\WebSocket($this->Lite, $this->server);
         $wSket->onMessage($frame);
         unset($wSket);
     }
     
     public function onTask($serv, $task_id, $from_id, $data) {
-        $wSket = new LiteApi\WebSocket($this->Lite, $serv);
+        $wSket = new LiteApi\WebSocket($this->Lite, $this->server);
         $fine = $wSket->onTask($serv, $task_id, $from_id, $data);
         
         if(!empty($fine) && count($fine)){
@@ -97,7 +97,7 @@ class LiWebSocket {
     }
     
     public function onTaskFinish($serv, $task_id, $data) {
-        $wSket = new LiteApi\WebSocket($this->Lite, $serv);
+        $wSket = new LiteApi\WebSocket($this->Lite, $this->server);
         $wSket->onTaskFinish($serv, $task_id, $data);
         unset($wSket);
     }
