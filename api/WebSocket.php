@@ -70,6 +70,10 @@ class WebSocket
     }
     
     public function onTask($serv, $task_id, $from_id, $data) { //任务
+        $fine = array();
+        
+        
+        return $fine;
         
     }
     

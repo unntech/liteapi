@@ -10,15 +10,18 @@ class LiteApi
     /**
      * 配置参数
      */
-    const VERSION = '1.0.4';
+    const VERSION = '1.0.5';
     public $config, $db, $redis;
     public $appName;
+    //public $repo;
+
     
     public function __construct()
     {
         $this->config = new \LitePhp\Config(DT_ROOT . "/config/");
         $this->config->load(['app', 'db', 'redis']);
         $this->appName = $this->config->get('app.name', 'LiteApi');
+
     }
     
     public function set_db($i=0){ //$i 为配置文件db列表里的第几个配置
@@ -60,5 +63,6 @@ class LiteApi
         $res = \LitePhp\LiHttp::post($url, $data, $aHeader);
         return $res;
     }
+    
     
 }
