@@ -50,7 +50,7 @@ class LiWebSocket {
         
         $this->server->on('WorkerStart', function ($serv, $worker_id){
 
-            $this->Lite = new LiteApi\LiteApi();
+            $this->Lite = new LiteApi\LiteApi($this->server);
             $this->Lite->config->load(['websocket']);
             $wSket = new LiteApi\WebSocket($this->Lite, $this->server);
             $wSket->onWorkerStart($serv, $worker_id);
@@ -63,7 +63,7 @@ class LiWebSocket {
         });
 
         $this->server->on('shutdown',function ($serv) {
-            $wSket = new LiteApi\WebSocket($this->Lite, $this->server);
+            $wSket = new LiteApi\WebSocket(new LiteApi\LiteApi($this->server), $this->server);
             $wSket->onShutdown($serv);
             unset($wSket);
         });

@@ -9,7 +9,6 @@ class WebSocket
 {
     protected $Lite, $DT_TIME;
     protected $srv;
-    protected $seckey = '';
     
     public function __construct($Lite, $srv)
     {
@@ -32,7 +31,7 @@ class WebSocket
     public function onOpen($request){ //建立连接
         //var_dump($request);
         //do something...
-        $this->response($request->fd, 'OPEN');
+        $this->Lite->response($request->fd, 'OPEN');
         $requestPath = isset($request->server['path_info']) ? explode('/',$request->server['path_info']) : [];
         
     }
@@ -44,21 +43,21 @@ class WebSocket
             $signType = isset($rd['signtype']) ? $rd['signtype'] : 'NONE';
             if($signType != 'NONE'){
                 $sec = 'abc';
-                if(!$this->verifySign($rd, $sec)){
-                    $this->response($frame->fd,'ERROR',11, '数据验签错误！');
+                if(!$this->Lite->verifySign($rd, $sec)){
+                    $this->Lite->response($frame->fd,'ERROR',11, '数据验签错误！');
                     return;
                 }
             }
                 $type = isset($rd['type']) ? $rd['type'] : 'NONE';
                 switch($type){
                     case 'NONE':
-                        $this->noneType($frame->fd);
+                        $this->Lite->noneType($frame->fd);
                         break;
                     case 'BEAT':
                         $this->heartbeat($frame->fd);
                         break;
                     default:
-                        $this->noneType($frame->fd);
+                        $this->Lite->noneType($frame->fd);
                 }
         }else{
             //接收数据不完整，或非字符
@@ -78,18 +77,8 @@ class WebSocket
         
     }
     
-    public function exist($fd){
-		return $this->srv->exist($fd);
-	}
-    
-    public function close($fd){
-        if($this->exist($fd)){
-            $this->srv->close($fd);
-        }
-    }
-    
     public function heartbeat($fd){
-        $this->response($fd,'BEAT');
+        $this->Lite->response($fd,'BEAT');
         /*----
 		$sqlc = "UPDATE `app_wsclients` SET beat = beat + 1 WHERE fd = {$fd}";
         $this->Lite->redis->expire($this->CFG['redis_pre'].'AppSocket_'.$fd, 1200);
@@ -97,69 +86,5 @@ class WebSocket
         ----*/
 	}
     
-    public function noneType($fd){
-        return $this->response($fd, 'NONE', 10);
-    }
     
-    public function noneSec($fd, $type){
-        return $this->response($fd, $type, 31);
-    }
-    
-    public function response($fd, $type, $err=0, $msg='', $data=array()){
-        if(isset($data['signtype']) && $data['signtype'] != 'NONE'){
-            ksort($data);
-            switch($data['signtype']){
-                case 'MD5':
-                    $sign = strtoupper(md5(json_encode($data,JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE).$this->seckey));
-                    $data['sign'] = $sign;
-                    break;
-                case 'SHA256':
-                    $sign = strtoupper(hash("sha256",json_encode($data,JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE).$this->seckey));
-                    $data['sign'] = $sign;
-                    break;
-                default:
-                    $data['sign'] = '';
-
-            }
-        }{
-            $data['signtype'] = 'NONE';
-        }
-        $ret = array('type'=>$type,'errcode'=>$err,'fd'=>$fd, 'msg'=>$msg);
-        $ret['data'] = $data;
-        $r = $this->srv->push($fd, json_encode($ret, JSON_UNESCAPED_SLASHES));
-        return $r;
-    }
-    
-    public function verifySign($data, $seckey = ''){
-        if($seckey == ''){
-            $seckey = $this->seckey;
-        }
-        $dataSign = isset($data['sign']) ? $data['sign'] : 'NONE';
-        ksort($data);
-        $verify = false;
-        if(isset($data['signtype']) && $data['signtype'] != 'NONE'){
-            switch($data['signtype']){
-                case 'MD5':
-                    unset($data['sign']);
-                    $sign = strtoupper(md5(json_encode($data,JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE).$seckey));
-                    if($dataSign == $sign){
-                        $verify = true;
-                    }
-                    break;
-                case 'SHA256':
-                    unset($data['sign']);
-                    $sign = strtoupper(hash("sha256",json_encode($data,JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE).$seckey));
-                    if($dataSign == $sign){
-                        $verify = true;
-                    }
-                    break;
-                default:
-                    $verify = false;
-            }
-        }else{
-            $verify = true;
-        }
-        
-        return $verify;
-    }
 }
