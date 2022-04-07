@@ -13,7 +13,6 @@ class LiteApi
     const VERSION = '1.0.5';
     public $config, $db, $redis;
     public $appName;
-    //public $repo;
 
     
     public function __construct()
