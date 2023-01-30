@@ -14,6 +14,7 @@ $httpApi->start();
 class LiHttpApi {
     public $server, $Lite;
     public $commTable;
+    //ipv6 的 $host = '::', 协义使用：SWOOLE_SOCK_TCP6，Linux系统下监听IPv6端口后使用IPv4地址也可以进行连接
     protected $host = '0.0.0.0';
     protected $port = 9898;
     protected $taskName = 'LiHttpApi';
