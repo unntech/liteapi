@@ -3,6 +3,8 @@
 defined('IN_LitePhp') or exit('Access Denied');
 
 return[
+    'ENVIRONMENT'   => 'DEV',  // 'DEV', 'PRO'
+    'APP_DEBUG'     => true,
     'name' => 'LiteApi',
     'authkey' => 'LitePhp_185622a8f4e2c72a9f75f8f5b8099259',
     'rsakey' => [

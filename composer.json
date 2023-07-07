@@ -11,7 +11,8 @@
     ],
     "require": {
         "php": ">=7.2",
-        "unntech/litephp": "*"
+        "unntech/litephp": "*",
+      "ext-json": "*"
     },
     "autoload": {
         "psr-4": {

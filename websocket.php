@@ -23,7 +23,7 @@ class LiWebSocket {
     ];
     
     public function __construct($param = []) {
-        $this->port = isset($param['port']) ? $param['port'] : 9898 ;
+        $this->port = $param['port'] ?? 9898;
         if(isset($param['SSL']) && $param['SSL']==true){
             $this->server = new Swoole\WebSocket\Server($this->host, $this->port, SWOOLE_PROCESS, SWOOLE_SOCK_TCP | SWOOLE_SSL );
         }else{

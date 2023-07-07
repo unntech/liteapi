@@ -52,13 +52,19 @@ class HttpApi
             $this->response($ret, $response);
             return;
         }
-        
-        if(!empty($requestPath[1]) && !empty($requestPath[2])){
-            $action = $requestPath[1];
-            $func = $requestPath[2];
+
+        $pathInfoCount = count($requestPath);
+        if($pathInfoCount >= 3){
+            $_func = array_pop($requestPath);
+            $_i = strpos($_func, '.');
+            $func = $_i === false ? $_func : substr($_func, 0, $_i);
+            unset($requestPath[0]);
+            $action = implode("\\", $requestPath);
             $newclass = "\\LiteApi\\controller\\".$action;
             try{
-                if(file_exists(__DIR__ . '/controller/'. $action . '.php')){
+                $filename = __DIR__ . '/controller/';
+                $filename .= str_replace("\\", '/', $action) . '.php';
+                if(file_exists($filename)){
                     $api = new $newclass();
                     $api->init($request, $this->Lite->config);
                     //$api->set_db();

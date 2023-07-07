@@ -75,6 +75,40 @@ ws://localhost:9899
 composer update unntech/litephp
 ~~~
 
+目录结构
+~~~
+yourApp/
+├── api                                     #LiteApi命名空间
+│   ├── controller                          #Api接口控制器方法目录，支持分项多级子目录
+│   ├── ...                                 #其它子模块
+│   ├── HttpApi.php                         #接口调用类
+│   ├── HttpRequest.php                     #控制器调用基础类
+│   ├── LiApiCommVar.php                    #共享公用变量类
+│   ├── LiteApi.php                         #LiteApi通用类，自动载入，默认全局变量$Lite
+│   ├── WebSketRepo.php                     #LiWebSocket response 基础类
+│   ├── WebSocket.php                       #LiWebSocket 基础类
+├── config                                  #配置文件
+│   ├── app.php                             #项目基础配置
+│   ├── db.php                              #数据库配置文件
+│   ├── redis.php                           #redis配置文件
+│   ├── websocket.php                       #WebSocket配置文件
+│   ├── httpapi.php                         #HttpApi配置文件
+├── docs                                    #文档
+│   ├── liteapi.sql                         #基础数据库表
+├── include                                 #通用函数库
+│   ├── common.php                          #全局通用函数
+├── log                                     #日志目录
+├── tests                                   #测试样例，可删除
+├── vendor                                  #composer目录
+├── autoload.php                            #autoload载入主程序
+├── composer.json                           #
+├── http.sh                                 #HttpApi启动命令
+├── httpapi.php                             #HttpApi主程序
+├── websocket.php                           #websocket主程序
+├── websocket.sh                            #WebSocket启动命令
+└── README.md
+~~~
+
 ## 文档
 
 [完全开发手册](#)
