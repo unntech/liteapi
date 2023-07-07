@@ -10,7 +10,7 @@ class LiteApi
     /**
      * 配置参数
      */
-    const VERSION = '1.0.5';
+    const VERSION = '1.0.6';
     public $config, $db, $redis;
     public $appName;
 
@@ -33,9 +33,11 @@ class LiteApi
         $this->db = null;
     }
     
-    public function set_redis(){
-        //$this->config->load(['redis']);
-        $this->redis = \LitePhp\Redis::Create($this->config->get('redis'));
+    public function set_redis(bool $reconnect = false){
+        if(empty($this->redis) || $reconnect) {
+            //$this->config->load(['redis']);
+            $this->redis = \LitePhp\Redis::Create($this->config->get('redis'));
+        }
     }
     
     public function close_redis(){
@@ -47,7 +49,10 @@ class LiteApi
         if(empty($this->db)){
             $this->set_db();
         }
-        $SQLC = "INSERT INTO alog (type, log1,log2,log3) VALUES ('{$type}', '" . addslashes( $log1 ) . "','" . addslashes( $log2 ) . "','" . addslashes( $log3 ) . "')";
+        $log1 = empty($log1) ? '' : addslashes( $log1 ) ;
+        $log2 = empty($log2) ? '' : addslashes( $log2 ) ;
+        $log3 = empty($log3) ? '' : addslashes( $log3 ) ;
+        $SQLC = "INSERT INTO alog (type, log1,log2,log3) VALUES ('{$type}', '" . $log1 . "','" . $log2 . "','" . $log3 . "')";
         $this->db->query( $SQLC );
         return $this->db->insert_id();
     }

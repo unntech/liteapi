@@ -69,8 +69,8 @@ class HttpApi
                     $ret =$req->response(-1, '接口不存在！');
                 }
                 
-            }catch(Exception $e){
-                echo $emsg = $e->getMessage();
+            }catch(\Throwable $e){
+                $emsg = $e->getMessage();
                 $ret =$req->response(-1, $emsg);
             }
         }else{
@@ -113,7 +113,7 @@ class HttpApi
      * 验证请求TOKEN
      */
     public function verifyToken($request){
-        $token = isset($request->header['token']) ? $request->header['token'] : '';
+        $token = $request->header['token'] ?? '';
         $auth = $this->Lite->config->get('httpapi.auth.auth', false);
         
         if($auth){ //需要验证

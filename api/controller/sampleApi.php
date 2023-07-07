@@ -11,7 +11,7 @@ class sampleApi extends HttpRequest
 {
     
     public function __construct(){
-        
+        parent::__construct();
     }
     
     
