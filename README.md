@@ -85,7 +85,7 @@ yourApp/
 │   ├── HttpRequest.php                     #控制器调用基础类
 │   ├── LiApiCommVar.php                    #共享公用变量类
 │   ├── LiteApi.php                         #LiteApi通用类，自动载入，默认全局变量$Lite
-│   ├── WebSketRepo.php                     #LiWebSocket response 基础类
+│   ├── WebSketRepo.php                     #LiWebSocket 基础类
 │   ├── WebSocket.php                       #LiWebSocket 基础类
 ├── config                                  #配置文件
 │   ├── app.php                             #项目基础配置
