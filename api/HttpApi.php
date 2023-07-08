@@ -37,7 +37,7 @@ class HttpApi
         if($requestPath[1] == 'authorize'){ //签发TOKEN
             $res = $this->authorize($request);
             if($res){
-                //$res['signtype'] = 'RSA';
+                //$res['signType'] = 'RSA';
                 $ret =$req->response(0, '获取TOKEN', $res);
             }else{
                 $ret =$req->response(100, '获取TOKEN失败！');

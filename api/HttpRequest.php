@@ -81,9 +81,9 @@ class HttpRequest
     }
     
     public function response($err=0, $msg='', $data=array()){
-        if(isset($data['signtype']) && $data['signtype'] != 'NONE'){
+        if(isset($data['signType']) && $data['signType'] != 'NONE'){
             ksort($data);
-            switch($data['signtype']){
+            switch($data['signType']){
                 case 'MD5':
                     $sign = strtoupper(md5(json_encode($data,JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE).$this->seckey));
                     $data['sign'] = $sign;
@@ -93,13 +93,13 @@ class HttpRequest
                     $data['sign'] = $sign;
                     break;
                 case 'RSA':
-                    $_rsa = new \LitePhp\LiRsa($this->config->get('app.rsakey.pubkey'), $this->config->get('app.rsakey.privkey'));
+                    $_rsa = new \LitePhp\LiRsa($this->config->get('app.rsaKey.pub'), $this->config->get('app.rsaKey.priv'));
                     $data = $_rsa->signArray($data);
                     break;
 
             }
         }{
-            $data['signtype'] = 'NONE';
+            $data['signType'] = 'NONE';
         }
         $ret = array('errcode'=>$err,'fd'=>$this->fd, 'msg'=>$msg);
         $ret['data'] = $data;
@@ -111,11 +111,11 @@ class HttpRequest
         if(!is_array($data)){
             return true;
         }
-        $dataSign = isset($data['sign']) ? $data['sign'] : 'NONE';
+        $dataSign = $data['sign'] ?? 'NONE';
         ksort($data);
         $verify = false;
-        if(isset($data['signtype']) && $data['signtype'] != 'NONE'){
-            switch($data['signtype']){
+        if(isset($data['signType']) && $data['signType'] != 'NONE'){
+            switch($data['signType']){
                 case 'MD5':
                     unset($data['sign']);
                     $sign = strtoupper(md5(json_encode($data,JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE).$this->seckey));
@@ -132,8 +132,8 @@ class HttpRequest
                     break;
                 case 'RSA':
                     //$data['sign'] = $dataSign;
-                    $_rsa = new \LitePhp\LiRsa($this->config->get('app.rsakey.pubkey'), $this->config->get('app.rsakey.privkey'));
-                    $_rsa->SetThirdPubKey($this->config->get('app.rsakey.thirdPubkey'));
+                    $_rsa = new \LitePhp\LiRsa($this->config->get('app.rsaKey.pub'), $this->config->get('app.rsaKey.priv'));
+                    $_rsa->SetThirdPubKey($this->config->get('app.rsaKey.thirdPub'));
                     $verify = $_rsa->verifySignArray($data);
                     break;
                 default:

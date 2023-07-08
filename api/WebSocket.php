@@ -40,7 +40,7 @@ class WebSocket
         //var_dump($frame);
         if($frame->finish && $frame->opcode == 1){
             $rd = json_decode($frame->data, true);
-            $signType = isset($rd['signtype']) ? $rd['signtype'] : 'NONE';
+            $signType = isset($rd['signType']) ? $rd['signType'] : 'NONE';
             if($signType != 'NONE'){
                 $sec = 'abc';
                 if(!$this->Lite->verifySign($rd, $sec)){

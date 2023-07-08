@@ -41,9 +41,9 @@ class WebSketRepo extends LiteApi
     }
     
     public function response($fd, $type, $err=0, $msg='', $data=array()){
-        if(isset($data['signtype']) && $data['signtype'] != 'NONE'){
+        if(isset($data['signType']) && $data['signType'] != 'NONE'){
             ksort($data);
-            switch($data['signtype']){
+            switch($data['signType']){
                 case 'MD5':
                     $sign = strtoupper(md5(json_encode($data,JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE).$this->seckey));
                     $data['sign'] = $sign;
@@ -57,7 +57,7 @@ class WebSketRepo extends LiteApi
 
             }
         }{
-            $data['signtype'] = 'NONE';
+            $data['signType'] = 'NONE';
         }
         $ret = array('type'=>$type,'errcode'=>$err,'fd'=>$fd, 'msg'=>$msg);
         $ret['data'] = $data;
@@ -72,8 +72,8 @@ class WebSketRepo extends LiteApi
         $dataSign = isset($data['sign']) ? $data['sign'] : 'NONE';
         ksort($data);
         $verify = false;
-        if(isset($data['signtype']) && $data['signtype'] != 'NONE'){
-            switch($data['signtype']){
+        if(isset($data['signType']) && $data['signType'] != 'NONE'){
+            switch($data['signType']){
                 case 'MD5':
                     unset($data['sign']);
                     $sign = strtoupper(md5(json_encode($data,JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE).$seckey));
