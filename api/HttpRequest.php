@@ -98,7 +98,7 @@ class HttpRequest
                     break;
 
             }
-        }{
+        }else{
             $data['signType'] = 'NONE';
         }
         $ret = array('errcode'=>$err,'fd'=>$this->fd, 'msg'=>$msg);
