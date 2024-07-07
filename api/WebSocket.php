@@ -7,6 +7,9 @@ defined('IN_LitePhp') or exit('Access Denied');
  */
 class WebSocket
 {
+    /**
+     * @var WebSketRepo
+     */
     protected $Lite, $DT_TIME;
     protected $srv;
     

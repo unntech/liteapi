@@ -7,6 +7,9 @@ defined('IN_LitePhp') or exit('Access Denied');
  */
 class HttpApi
 {
+    /**
+     * @var LiteApi
+     */
     protected $Lite, $DT_TIME;
     
     public function __construct($Lite)
