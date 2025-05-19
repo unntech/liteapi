@@ -10,7 +10,7 @@ class LiteApi
     /**
      * 配置参数
      */
-    const VERSION = '1.0.6';
+    const VERSION = '1.0.7';
     public $config, $db, $redis;
     public $appName;
 

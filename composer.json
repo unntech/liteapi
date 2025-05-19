@@ -2,11 +2,13 @@
     "name": "unntech/liteapi",
     "description": "A lite php Framework for api provide",
     "type": "project",
-    "license": "Apache-2.0",
+    "license": "MIT",
+    "homepage": "https://github.com/unntech/liteapi",
     "authors": [
         {
             "name": "Jason Lin",
-            "email": "lzs9605@gmail.com"
+            "email": "lzs9605@gmail.com",
+            "homepage": "https://www.zhisg.com"
         }
     ],
     "require": {
