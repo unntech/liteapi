@@ -4,7 +4,7 @@ LiteApi 1.0
 
 [![Total Downloads](https://poser.pugx.org/unntech/liteapi/downloads)](https://packagist.org/packages/unntech/liteapi)
 [![Latest Stable Version](https://poser.pugx.org/unntech/liteapi/v/stable)](https://packagist.org/packages/unntech/liteapi)
-[![PHP Version](https://img.shields.io/badge/php-%3E%3D7.0-8892BF.svg)](http://www.php.net/)
+[![PHP Version](https://img.shields.io/badge/php-%3E%3D7.2-8892BF.svg)](http://www.php.net/)
 [![License](https://poser.pugx.org/unntech/liteapi/license)](https://packagist.org/packages/unntech/liteapi)
 
 基于PHP Swoole 创建的协程框架，可用于生产环境的高性能API接口。

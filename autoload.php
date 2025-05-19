@@ -1,6 +1,6 @@
 <?php
 
-define('IN_LitePhp', true);
+const IN_LitePhp = true;
 define('DT_ROOT', str_replace("\\", '/', __DIR__ ));
 
 require_once DT_ROOT . '/vendor/autoload.php';
