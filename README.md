@@ -2,9 +2,10 @@
 LiteApi 1.0
 ===============
 
-[![Total Downloads](https://poser.pugx.org/unntech/liteapi/downloads)](https://packagist.org/packages/unntech/liteapi)
 [![Latest Stable Version](https://poser.pugx.org/unntech/liteapi/v/stable)](https://packagist.org/packages/unntech/liteapi)
-[![PHP Version](https://img.shields.io/badge/php-%3E%3D7.2-8892BF.svg)](http://www.php.net/)
+[![Total Downloads](https://poser.pugx.org/unntech/liteapi/downloads)](https://packagist.org/packages/unntech/liteapi)
+[![Latest Unstable Version](http://poser.pugx.org/unntech/liteapi/v/unstable)](https://packagist.org/packages/unntech/liteapi)
+[![PHP Version Require](http://poser.pugx.org/unntech/liteapi/require/php)](https://packagist.org/packages/unntech/liteapi)
 [![License](https://poser.pugx.org/unntech/liteapi/license)](https://packagist.org/packages/unntech/liteapi)
 
 基于PHP Swoole 创建的协程框架，可用于生产环境的高性能API接口。
@@ -23,6 +24,8 @@ LiteApi 1.0
 
 > LiteApi 1.0的运行环境要求PHP7.0+，兼容PHP8.1
 > 需要安装 ext-swoole 扩展
+> 
+> 建议使用 LiteSwoole 2.0 https://github.com/unntech/liteSwoole
 
 ## 安装
 
